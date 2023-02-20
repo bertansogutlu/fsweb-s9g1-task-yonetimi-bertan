@@ -60,14 +60,18 @@ export default function TaskHookForm({ kisiler, submitFn }) {
                 name="people"
                 value={p}
                 {...register("people", {
-                  minLength:{
-                    value: 1,
-                    message: "Lütfen en az bir kişi seçin"
-                  },
-                  maxLength:{
-                    value: 3,
-                    message: "En fazla 3 kişi seçebilirsiniz"
+                  validate: {
+                    min: v => v.length > 0,
+                    max: v => v.length < 3,
                   }
+                  // minLength:{
+                  //   value: 1,
+                  //   message: "Lütfen en az bir kişi seçin"
+                  // },
+                  // maxLength:{
+                  //   value: 3,
+                  //   message: "En fazla 3 kişi seçebilirsiniz"
+                  // }
                   })}
               />
               {p}

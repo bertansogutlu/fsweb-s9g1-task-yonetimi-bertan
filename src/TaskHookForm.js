@@ -1,12 +1,21 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
+import { nanoid } from "nanoid";
 
 export default function TaskHookForm({ kisiler, submitFn }) {
 
-  const {register, handleSubmit, formState: {errors, isValid}} = useForm({mode: "onChange"});
+  const {register, handleSubmit, reset, formState: {errors, isValid}} = useForm({mode: "onChange"});
   
   console.log(errors)
-  const onSubmit = (data) => { console.log(data) };
+  const onSubmit = (data) => {
+    console.log(data);
+    submitFn({
+      ...data,
+      id: nanoid(5),
+      status: "yapılacak",
+    });
+    reset()
+  };
 
   return (
     <form className="taskForm" onSubmit={handleSubmit(onSubmit)}>

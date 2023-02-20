@@ -4,7 +4,10 @@ import { nanoid } from "nanoid";
 
 export default function TaskHookForm({ kisiler, submitFn }) {
 
-  const {register, handleSubmit, reset, formState: {errors, isValid}} = useForm({mode: "onChange"});
+  const {register, handleSubmit, reset, formState: {errors, isValid}} = useForm({
+    mode: "onChange",
+    defaultValues: { title: "", description: "", people: [] },
+  });
   
   console.log(errors)
   const onSubmit = (data) => {

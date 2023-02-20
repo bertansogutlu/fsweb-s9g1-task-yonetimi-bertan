@@ -3,13 +3,8 @@ import { useForm } from "react-hook-form";
 
 export default function TaskHookForm({ kisiler, submitFn }) {
 
-  const {register, handleSubmit, formState: {errors}} = useForm({
-    defaultValues: {
-      title: "",
-      description: "",
-      people: []
-    }
-  });
+  const {register, handleSubmit, formState: {errors, isValid}} = useForm({mode: "onChange"});
+  
   console.log(errors)
   const onSubmit = (data) => { console.log(data) };
 
@@ -86,7 +81,7 @@ export default function TaskHookForm({ kisiler, submitFn }) {
         <button
           className="submit-button"
           type="submit"
-          disabled={false}
+          disabled={!isValid}
         >
           Kaydet
         </button>

@@ -28,14 +28,14 @@ export default function TaskHookForm({ kisiler, submitFn }) {
   return (
     <form className="taskForm" onSubmit={handleSubmit(onSubmit)}>
       <ToastContainer
-        position="top-right"
-        autoClose={5000}
+        position="top-center"
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}
-        closeOnClick
+        closeOnClick={false}
         rtl={false}
-        pauseOnFocusLoss
-        draggable
+        pauseOnFocusLoss={false}
+        draggable={false}
         pauseOnHover
         theme="light"
       />

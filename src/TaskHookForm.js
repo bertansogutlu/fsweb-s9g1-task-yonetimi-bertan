@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function TaskHookForm() {
+export default function TaskHookForm({ kisiler, submitFn }) {
   return (
-    <form className="taskForm" onSubmit={handleSubmit}>
+    <form className="taskForm">
       <div className="form-line">
         <label className="input-label" htmlFor="title">
           Başlık
@@ -12,10 +12,8 @@ export default function TaskHookForm() {
           id="title"
           name="title"
           type="text"
-          onChange={handleOthersChange}
-          value={formData.title}
         />
-        <p className="input-error">{formErrors.title}</p>
+        <p className="input-error">{"formErrors.title"}</p>
       </div>
 
       <div className="form-line">
@@ -27,10 +25,8 @@ export default function TaskHookForm() {
           rows="3"
           id="description"
           name="description"
-          onChange={handleOthersChange}
-          value={formData.description}
         ></textarea>
-        <p className="input-error">{formErrors.description}</p>
+        <p className="input-error">{"formErrors.description"}</p>
       </div>
 
       <div className="form-line">
@@ -42,21 +38,19 @@ export default function TaskHookForm() {
                 type="checkbox"
                 name="people"
                 value={p}
-                onChange={handleCheckboxChange}
-                checked={formData.people.includes(p)}
               />
               {p}
             </label>
           ))}
         </div>
-        <p className="input-error">{formErrors.people}</p>
+        <p className="input-error">{""}</p>
       </div>
 
       <div className="form-line">
         <button
           className="submit-button"
           type="submit"
-          disabled={buttonDisabled}
+          disabled={false}
         >
           Kaydet
         </button>
@@ -64,4 +58,4 @@ export default function TaskHookForm() {
     </form>
   );
 };
-}
+

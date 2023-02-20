@@ -1,14 +1,18 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
-import { nanoid } from "nanoid";
+import { nanoid } from "nanoid"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function TaskHookForm({ kisiler, submitFn }) {
 
-  const {register, handleSubmit, reset, formState: {errors, isValid}} = useForm({
+  const { register, handleSubmit, reset, formState: { errors, isValid } } = useForm({
     mode: "onChange",
     defaultValues: { title: "", description: "", people: [] },
   });
-  
+
+  const notify = () => toast("Yeni task eklendi!");
+
   console.log(errors)
   const onSubmit = (data) => {
     console.log(data);
@@ -17,11 +21,24 @@ export default function TaskHookForm({ kisiler, submitFn }) {
       id: nanoid(5),
       status: "yapılacak",
     });
-    reset()
+    reset();
+    notify()
   };
 
   return (
     <form className="taskForm" onSubmit={handleSubmit(onSubmit)}>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="form-line">
         <label className="input-label" htmlFor="title">
           Başlık
@@ -33,11 +50,11 @@ export default function TaskHookForm({ kisiler, submitFn }) {
           type="text"
           {...register("title", {
             required: "Task başlığı yazmalısınız",
-            minLength:{
+            minLength: {
               value: 4,
               message: "Task başlığı en az 3 karakter olmalı"
             }
-            })}
+          })}
         />
         <p className="input-error">{errors.title?.message}</p>
       </div>
@@ -53,11 +70,11 @@ export default function TaskHookForm({ kisiler, submitFn }) {
           name="description"
           {...register("description", {
             required: "Task açıklaması yazmalısınız",
-            minLength:{
+            minLength: {
               value: 10,
               message: "Task açıklaması en az 10 karakter olmalı"
             }
-            })}
+          })}
         ></textarea>
         <p className="input-error">{errors.description?.message}</p>
       </div>
@@ -76,7 +93,7 @@ export default function TaskHookForm({ kisiler, submitFn }) {
                   validate: {
                     max: v => v.length < 3 || "En fazla 3 kişi seçebilirsiniz"
                   }
-                  })}
+                })}
               />
               {p}
             </label>

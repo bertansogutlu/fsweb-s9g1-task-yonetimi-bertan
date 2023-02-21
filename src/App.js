@@ -13,7 +13,7 @@ function App() {
   const [tasks, setTasks] = useState(initialTasks);
   const [team, setTeam] = useState(initialTeam);
 
-  const notify = () => toast("Task tamamlandı!");
+  const notify = (current) => toast(<>{current}<br/><br/>Tamamlandı!</>);
 
   function handleTaskSubmit(yeniTask) {
     setTasks([yeniTask, ...tasks])
@@ -24,9 +24,10 @@ function App() {
   }
 
   function handleComplete(id) {
-    tasks.filter((t) => t.id === id)[0].status = "yapıldı";
+    let current = tasks.filter((t) => t.id === id)[0];
+    current.status = "yapıldı";
     setTasks([...tasks]);
-    notify()
+    notify(current.title)
   }
 
   return (
